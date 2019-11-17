@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './modal.module.css';
 import BackDrop from './../backdrop/backdrop'
-import Aux from './../../../hoc/aux'
+import Aux from '../../../hoc/auxComponent';
 
 export default (props) => {
   let inlineStyles = {
