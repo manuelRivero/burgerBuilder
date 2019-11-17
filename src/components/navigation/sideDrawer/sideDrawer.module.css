@@ -20,11 +20,11 @@
     }
 }
 
-.open{
+.Open{
     transform: translateX(0);
 
 }
 
-.closed{
+.Closed{
     transform: translateX(-100%);
 }
