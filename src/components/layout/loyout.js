@@ -8,17 +8,24 @@ export default class Layout extends React.Component{
   constructor(){
     super()
     this.state={
-      showSideDrawer:true
+      showSideDrawer:false
     }
   }
   closeSideDrawerHandler = ()=>{
     this.setState({showSideDrawer:false})
   }
+  toggleSideDrawerHandler = ()=>{
+    this.setState( (oldState)=>{
+      return {
+        showSideDrawer: !oldState.showSideDrawer
+      }
+    })
+  }
  render(){
           return (
             <Aux>  
 
-                  <Toolbar/>
+                  <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} />
                   <SideDrawer showSideDrawer={this.state.showSideDrawer} closeSideDrawer={this.closeSideDrawerHandler}/>
                   <main className={styles.Content}>
                       {this.props.children}

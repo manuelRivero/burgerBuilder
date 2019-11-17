@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './toolbar.module.css';
 import Logo from './../logo/logo';
-import NavigationItem from './../navigationItems/navigationItems'
+import DrawerToggle from './../sideDrawer/drawerToggle/drawerToggle';
+import NavigationItem from './../navigationItems/navigationItems';
 
-export default function Toolbar() {
+export default function Toolbar(props) {
   return (
     <header className={styles.Toolbar}>
-        <div>menu</div>
+        <DrawerToggle toggle={props.toggleSideDrawer} />
         <div className={styles.Logo}>
           <Logo />
         </div>
