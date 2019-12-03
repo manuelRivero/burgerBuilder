@@ -13,15 +13,21 @@ export default function withErrorHandler(Component, axios) {
             this.state={
                 error:null
             }
-            axios.interceptors.response.use( res => res, (err)=>{
+            this.resInterceptor = axios.interceptors.response.use( res => res, (err)=>{
                 this.setState({error:err})
             })
 
-            axios.interceptors.request.use((req)=>{
+            this.reqInterceptor = axios.interceptors.request.use((req)=>{
                 this.setState({error:null});
                 return req;
             })
-        }            
+        }      
+        
+        componentWillUnmount(){
+            axios.interceptors.request.reject(this.reqInterceptor);
+            axios.interceptors.response.reject(this.resInterceptor)
+
+        }
 
         closeClickHandler=()=>{
             this.setState({error:null})

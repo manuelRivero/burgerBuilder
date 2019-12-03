@@ -89,7 +89,7 @@ const INGREDIENT_PRICE={
   }
 
   componentDidMount(){
-    axios.get('https://mi-proyecto-5192d.firebaseio.com/ingredients.')
+    axios.get('https://mi-proyecto-5192d.firebaseio.com/ingredients.json')
     .then( response =>{
       this.setState({ingredients:response.data})
     }).catch( err => { this.setState({error:err})})
