@@ -69,7 +69,7 @@ const INGREDIENT_PRICE={
   }
 
   continuePurchasing=()=>{
-    this.setState({loading:true})
+    /*this.setState({loading:true})
     const {ingredients, totalPrice}=this.state;
     const order={
       ingredients,
@@ -85,7 +85,8 @@ const INGREDIENT_PRICE={
     
     axios.post('/orders.json', order)
     .then( res => this.setState({loading:false, purchasing:false}))
-    .catch( err => this.setState({loading:false}))
+    .catch( err => this.setState({loading:false})) */
+    this.props.history.push('/checkout');
   }
 
   componentDidMount(){

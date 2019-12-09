@@ -24,8 +24,8 @@ export default function withErrorHandler(Component, axios) {
         }      
         
         componentWillUnmount(){
-            axios.interceptors.request.reject(this.reqInterceptor);
-            axios.interceptors.response.reject(this.resInterceptor)
+            //axios.interceptors.request.reject(this.reqInterceptor);
+            //axios.interceptors.response.reject(this.resInterceptor)
 
         }
 
