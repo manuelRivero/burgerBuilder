@@ -86,7 +86,18 @@ const INGREDIENT_PRICE={
     axios.post('/orders.json', order)
     .then( res => this.setState({loading:false, purchasing:false}))
     .catch( err => this.setState({loading:false})) */
-    this.props.history.push('/checkout');
+
+    
+    let queryPArams = [];
+    for (let i in this.state.ingredients){
+      queryPArams.push(encodeURIComponent(i) + '=' + encodeURIComponent( this.state.ingredients[i]))
+    }
+
+    const queryString= queryPArams.join('&')
+    this.props.history.push({
+      pathname:"/checkout",
+      search: '?' + queryString
+    });
   }
 
   componentDidMount(){
