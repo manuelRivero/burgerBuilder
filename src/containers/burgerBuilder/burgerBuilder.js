@@ -69,30 +69,12 @@ const INGREDIENT_PRICE={
   }
 
   continuePurchasing=()=>{
-    /*this.setState({loading:true})
-    const {ingredients, totalPrice}=this.state;
-    const order={
-      ingredients,
-      totalPrice,
-      address:{
-        street:"siempreviva123",
-        zipCode:"6060",
-        contry:"argentina"
-      },
-      email:'manuel.enrique.r.v@gmail.com',
-      deliverymethod:"fastest"
-    }
-    
-    axios.post('/orders.json', order)
-    .then( res => this.setState({loading:false, purchasing:false}))
-    .catch( err => this.setState({loading:false})) */
-
     
     let queryPArams = [];
     for (let i in this.state.ingredients){
       queryPArams.push(encodeURIComponent(i) + '=' + encodeURIComponent( this.state.ingredients[i]))
     }
-
+    queryPArams.push('price=' + this.state.totalPrice)
     const queryString= queryPArams.join('&')
     this.props.history.push({
       pathname:"/checkout",

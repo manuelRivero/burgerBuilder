@@ -10,10 +10,9 @@ import Checkout from './containers/checkout/checkout'
 
 function App() {
   return (
-    <Layout>
+    <Layout>      
+      <Route path='/checkout' component={Checkout}/>
       <Route path='/'  exact component={BurgerBuilder}/>
-      <Route path='/checkout' exact component={Checkout}/>
-      
     </Layout>
   );
 }
