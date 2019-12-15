@@ -5,11 +5,13 @@
     display: flex;
     flex-flow: column;
     align-items: center;
-    height: 100%;
+    position: relative;
 }
 
 @media (min-width:500px){
     .NavigationItems{
         flex-flow: row;
+        height: 100%;
+
     }
 }

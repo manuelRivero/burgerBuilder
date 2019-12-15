@@ -13,12 +13,16 @@
     z-index: 90;
 }
 
+.Navigation{
+    height: 100%;
+}
+
 .Logo{
     height: 80%;
 }
 
 @media (max-width:500px){
-    .DesktopOnly{
+    .Navigation{
         display: none;
     }
 }

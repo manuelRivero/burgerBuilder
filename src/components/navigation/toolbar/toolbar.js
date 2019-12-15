@@ -11,7 +11,7 @@ export default function Toolbar(props) {
         <div className={styles.Logo}>
           <Logo />
         </div>
-        <nav className={styles.DesktopOnly}>
+        <nav className={[styles.Navigation]}>
             <NavigationItem />
         </nav>
     </header>
