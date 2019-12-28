@@ -3,19 +3,22 @@ import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/spinner/spinner';
 
 import Buttom from './../../../components/UI/button/button';
+import Input from './../../../components/UI/input/input'
 
 import styles from './contactData.module.css';
+
+import {createInput} from '../../../helpers/formHelper'
 
 export default class ContactData extends Component {
     constructor(){
         super()
         this.state={
-            name:"",
-            email:"",
-            address:{
-                street:"",
-                postalCode:""
-            },
+           form:{
+             name: createInput('name', 'text', 'Your name', ''),
+             email: createInput('email', 'email', 'Your email', ''),
+             street: createInput('street', 'text', 'Your address', ''),
+             postal: createInput('postal', 'text', 'Your Zip Code', ''),
+           },
             loading:false
         }
     }
@@ -45,13 +48,22 @@ export default class ContactData extends Component {
 
     }
   render() {
+    let inputArray = [];
+    for( let i in this.state.form){
+      let input =this.state.form[i]
+      inputArray.push({...input, key:input.name, label:input.name});
+    }
+
     let form =(
             <form>
-                <input type="text" className={styles.Input} name="name" placeholder="Your name" />
-                <input type="email" className={styles.Input} name="email" placeholder="Your email" />
-                <input type="text" className={styles.Input} name="street" placeholder="Your street" />
-                <input type="text" className={styles.Input} name="postal" placeholder="Your postal code" />
-                <Buttom type="Success" clicked={this.clickHandler} > Continue </Buttom>
+              {
+                inputArray.map( data => {
+                  return(<Input {...data} /> )
+                })
+
+                
+              }
+              <Buttom type="Success" />
             </form>
     )
 
