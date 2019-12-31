@@ -18,6 +18,7 @@ export default class ContactData extends Component {
              email: createInput('email', 'email', 'Your email', ''),
              street: createInput('street', 'text', 'Your address', ''),
              postal: createInput('postal', 'text', 'Your Zip Code', ''),
+             deleveryMethod: createInput('deleveryMethod', 'select', 'Your Zip Code', '', ['Fastesd', 'cheapest'])
            },
             loading:false
         }
@@ -47,6 +48,15 @@ export default class ContactData extends Component {
     .catch( err => this.setState({loading:false}));
 
     }
+
+    inputChangedHandler= ({target})=>{
+      const updateform = {...this.state.form};
+      let updateInput = {...updateform[target.name], value:target.value }
+      updateform[target.name] = updateInput;
+
+      this.setState( {form:updateform})
+    }
+
   render() {
     let inputArray = [];
     for( let i in this.state.form){
@@ -58,7 +68,7 @@ export default class ContactData extends Component {
             <form>
               {
                 inputArray.map( data => {
-                  return(<Input {...data} /> )
+                  return(<Input {...data} changed={this.inputChangedHandler}/> )
                 })
 
                 
