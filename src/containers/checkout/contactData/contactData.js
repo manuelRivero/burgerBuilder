@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/spinner/spinner';
 
-import Buttom from './../../../components/UI/button/button';
+import Button from './../../../components/UI/button/button';
 import Input from './../../../components/UI/input/input'
 
 import styles from './contactData.module.css';
@@ -14,31 +14,31 @@ export default class ContactData extends Component {
         super()
         this.state={
            form:{
-             name: createInput('name', 'text', 'Your name', ''),
-             email: createInput('email', 'email', 'Your email', ''),
-             street: createInput('street', 'text', 'Your address', ''),
-             postal: createInput('postal', 'text', 'Your Zip Code', ''),
+             name: createInput('name', 'text', 'Your name', '', null, { required:true, minLength:3}),
+             email: createInput('email', 'email', 'Your email', '', null, { required:true, minLength:3}),
+             street: createInput('street', 'text', 'Your address', '', null, { required:true, minLength:3}),
+             postal: createInput('postal', 'text', 'Your Zip Code', '', null, { required:true, minLength:3}),
              deleveryMethod: createInput('deleveryMethod', 'select', 'Your Zip Code', '', ['Fastesd', 'cheapest'])
            },
             loading:false
         }
     }
 
-    clickHandler= (e)=>{
+    submitHandler= (e)=>{
       e.preventDefault();
       
     this.setState({loading:true})
+    const orderData ={};
+
+    for (let inputKey in this.state.form){
+      orderData[inputKey] = this.state.form[inputKey].value;
+    }
+    console.log(orderData)
     const {ingredient, price}=this.props;
     const order={
       ingredient,
       price,
-      address:{
-        street:"siempreviva123",
-        zipCode:"6060",
-        contry:"argentina"
-      },
-      email:'manuel.enrique.r.v@gmail.com',
-      deliverymethod:"fastest"
+      orderData
     }
     
     axios.post('/orders.json', order)
@@ -49,12 +49,50 @@ export default class ContactData extends Component {
 
     }
 
+    inputBlurHandler=({target})=>{
+      console.log("blur")
+      const updateform = {...this.state.form};
+      let updateInput = {
+           ...updateform[target.name],
+           touched: true
+          };
+
+          updateform[target.name] = updateInput;
+          
+      this.setState( {form:updateform})
+    }
+
+
     inputChangedHandler= ({target})=>{
       const updateform = {...this.state.form};
-      let updateInput = {...updateform[target.name], value:target.value }
+      let updateInput = {
+           ...updateform[target.name],
+           value:target.value,
+           dirty:true
+          };
+
+      updateInput.valid = this.checkValidity(target.value, updateform[target.name].validation); 
+      updateInput.wasInvalid = updateInput.valid && updateInput.touched;
       updateform[target.name] = updateInput;
 
+      
       this.setState( {form:updateform})
+    }
+
+    checkValidity(value, rules){
+      let isValid= true;
+      
+      if(!rules){
+        return isValid;
+      }
+        if( rules.required){
+          isValid = value.trim() !== "" && isValid;
+        }
+
+        if( rules.minLength){
+          isValid = value.length >= rules.minLength && isValid;
+        }
+      return isValid;
     }
 
   render() {
@@ -65,15 +103,15 @@ export default class ContactData extends Component {
     }
 
     let form =(
-            <form>
+            <form onSubmit={this.submitHandler}>
               {
                 inputArray.map( data => {
-                  return(<Input {...data} changed={this.inputChangedHandler}/> )
+                  return(<Input {...data} changed={this.inputChangedHandler} blur={this.inputBlurHandler}/> )
                 })
 
                 
               }
-              <Buttom type="Success" />
+              <Button type="Success" >Continue</Button>
             </form>
     )
 

@@ -26,3 +26,21 @@
     background-color: #ccc;
     outline: none;
 }
+
+.Invalid{
+    background-color: rgb(240, 168, 160);
+    border: 1px solid red;
+
+}
+
+.Invalid:focus{
+    border: 1px solid red;
+    outline: none;
+}
+
+.WasInvalid{
+    border: 1px solid green !important;
+    background-color: rgb(160, 240, 171);
+    transition: all .3s;
+
+}
