@@ -8,7 +8,7 @@ export const createInput= (name, type, placeholder, value, options=null, validat
             name:name,
             options: options,
             validation: validation,
-            valid: false,
+            valid: validation ? false : true,
             touched: false,
             dirty: false,
             wasInvalid:false

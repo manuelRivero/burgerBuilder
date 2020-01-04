@@ -96,6 +96,12 @@ export default class ContactData extends Component {
     }
 
   render() {
+    let formIsValid = true;
+    
+    //handling submission state
+    for(let input in this.state.form){
+      formIsValid = this.state.form[input].valid && formIsValid;
+    }
     let inputArray = [];
     for( let i in this.state.form){
       let input =this.state.form[i]
@@ -111,7 +117,7 @@ export default class ContactData extends Component {
 
                 
               }
-              <Button type="Success" >Continue</Button>
+              <Button type="Success" disabled={!formIsValid} >Continue</Button>
             </form>
     )
 
