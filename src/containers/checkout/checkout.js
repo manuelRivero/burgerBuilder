@@ -3,33 +3,12 @@ import {Route} from 'react-router-dom'
 import CheckoutSummary from './../../components/checkoutSummary/checkoutSummary'
 import ContactData from './contactData/contactData';
 
+import {connect} from 'react-redux'
 
-export default class Checkout extends Component {
 
-  state={
-    ingredients:{
-      bacon:0,
-      meat:0,
-      cheese:0,
-      salad:0
-    }, price:0
-    
-  }
+class Checkout extends Component {
 
-  componentDidMount(){
-    const query = new URLSearchParams(this.props.location.search);
-    const ingredients={}
-    let price = 0;
-    for(let param of query.entries()){
-      if( param[0] === 'price'){
-        price = param[1];
-      }else{
-              ingredients[param[0]] = +param[1]
-      }
-    }
 
-    this.setState({ingredients, price})
-  }
 
   
   checkoutCancelledHandler= ()=>{
@@ -38,22 +17,31 @@ export default class Checkout extends Component {
   checkoutContinueHandler= ()=>{
     this.props.history.replace('/checkout/contact-data');
   }
+
+  updatePurchaseState=(ingredients)=>{
+    let sum = Object.keys(ingredients).map( ingKeys =>{
+      return ingredients[ingKeys];
+    }).reduce( (sum, element)=>{
+      return sum + element
+    }, 0)
+
+    return sum > 0 ;
+  }
   render() {
-    const ingredient={
-      bacon:1,
-      meat:1
+    if(!this.updatePurchaseState(this.props.ingredients)){
+     this.props.history.replace('/');
     }
 
     return (
       <>
         <div  >
             <CheckoutSummary  
-                  ingredient={this.state.ingredients}  
+                  ingredient={this.props.ingredients}  
                   checkoutCancelled={this.checkoutCancelledHandler}
                   checkoutContinue={this.checkoutContinueHandler}/>
 
             <Route path={`/checkout/contact-data`}  render={ (props)=>{
-                return ( <ContactData {...props} ingredient={this.state.ingredients} price={this.state.price}/>)
+                return ( <ContactData {...props} ingredient={this.props.ingredients} price={this.props.totalPrice}/>)
             }} />
         </div>
 
@@ -61,3 +49,12 @@ export default class Checkout extends Component {
     )
   }
 }
+
+const mapstateToProps = state =>{
+  return ({
+    ingredients: state.ingredients,
+    totalPrice: state.totalPrice
+  })
+}
+
+export default connect(mapstateToProps, null)(Checkout);
