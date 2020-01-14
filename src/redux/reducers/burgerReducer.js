@@ -1,4 +1,4 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT} from './../actions/burgerActions';
+import * as actionTypes from './../actions/index';
 
 
 const INGREDIENT_PRICE={
@@ -22,14 +22,14 @@ const initialState= {
 
 const reducer =(state=initialState, action)=>{
     switch (action.type) {
-        case ADD_INGREDIENT:
+        case actionTypes.ADD_INGREDIENT:
             
             return {
                 ...state,
                 ingredients: {...state.ingredients, [action.payload]: state.ingredients[action.payload] + 1  },
                 totalPrice: state.totalPrice + INGREDIENT_PRICE[action.payload]
             };
-        case REMOVE_INGREDIENT:
+        case actionTypes.REMOVE_INGREDIENT:
             return ({
                 ...state,
                 ingredients: {...state.ingredients, [action.payload]: state.ingredients[action.payload] - 1  },

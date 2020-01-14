@@ -17,7 +17,7 @@ import WithErrorHandler from './../../hoc/withErrorHandler/withErrorHandler';
 
 import {connect} from 'react-redux';
 
-import * as actions from './../../redux/actions/burgerActions';
+import * as actions from './../../redux/actions/index';
 
  class BurgerBuilder extends Component {
   state={
