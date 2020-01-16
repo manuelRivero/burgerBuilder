@@ -26,6 +26,12 @@ import * as actions from './../../redux/actions/index';
     loading:false
   }
 
+  componentDidMount(){
+    
+    this.props.initIngredients()
+
+  }
+
   addIngredientHandler=(ingredient)=>{
     this.props.addIngredient(ingredient);
     this.updatePurchaseState(this.props.ingredients)
@@ -82,7 +88,7 @@ import * as actions from './../../redux/actions/index';
   
   render() {
     let disabledInfo= {...this.props.ingredients};
-    let burger = this.state.error ? <p>Ingredients can't be loaded</p> : <Spinner />
+    let burger = this.props.error ? <p>Ingredients can't be loaded</p> : <Spinner />
     let orderSummary = null
 
     for( let key in disabledInfo){
@@ -125,17 +131,21 @@ import * as actions from './../../redux/actions/index';
   }
 }
 
+
 const mapStateToProps = state =>{
   return {
     ingredients: state.ingredients,
-    totalPrice: state.totalPrice
+    totalPrice: state.totalPrice,
+    error: state.error
   }
 }
 
 const mapDispachToProps = dispatch =>{
   return {
     addIngredient: (ingredient)=>dispatch(actions.addIngredient(ingredient)),
-    removeIngredient: (ingredient)=>dispatch(actions.removeIngredient(ingredient))
+    removeIngredient: (ingredient)=>dispatch(actions.removeIngredient(ingredient)),
+    initIngredients: ()=> dispatch(actions.initIngredients()
+    )
   }
 }
 
