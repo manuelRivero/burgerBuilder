@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from '../../../axios-orders';
+import {connect} from 'react-redux'
+import * as actions from '../../../redux/actions/orders'
 import Spinner from '../../../components/UI/spinner/spinner';
 
 import Button from './../../../components/UI/button/button';
@@ -9,7 +10,7 @@ import styles from './contactData.module.css';
 
 import {createInput} from '../../../helpers/formHelper'
 
-export default class ContactData extends Component {
+ class ContactData extends Component {
     constructor(){
         super()
         this.state={
@@ -27,26 +28,19 @@ export default class ContactData extends Component {
     submitHandler= (e)=>{
       e.preventDefault();
       
-    this.setState({loading:true})
     const orderData ={};
 
     for (let inputKey in this.state.form){
       orderData[inputKey] = this.state.form[inputKey].value;
     }
-    console.log(orderData)
-    const {ingredient, price}=this.props;
+    
+    const {ingredients, price}=this.props;
     const order={
-      ingredient,
+      ingredients,
       price,
       orderData
     }
-    
-    axios.post('/orders.json', order)
-    .then( res => {
-      this.setState({loading:false,});
-      this.props.history.replace('/')})
-    .catch( err => this.setState({loading:false}));
-
+    this.props.submitContactData(order);
     }
 
     inputBlurHandler=({target})=>{
@@ -134,3 +128,18 @@ export default class ContactData extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return ({
+    ingredients: state.ingredients,
+    price: state.price
+  })
+}
+
+const mapDiscpachtToProps = dispatch => {
+  return ( {
+      submitContactData : (order) => dispatch(actions.purchaseBurger(order))
+  })
+}
+
+export default connect( mapStateToProps, mapDiscpachtToProps) (ContactData)
