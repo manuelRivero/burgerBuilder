@@ -20,8 +20,7 @@ import {createInput} from '../../../helpers/formHelper'
              street: createInput('street', 'text', 'Your address', '', null, { required:true, minLength:3}),
              postal: createInput('postal', 'text', 'Your Zip Code', '', null, { required:true, minLength:3}),
              deleveryMethod: createInput('deleveryMethod', 'select', 'Your Zip Code', '', ['Fastesd', 'cheapest'])
-           },
-            loading:false
+           }
         }
     }
 
@@ -115,7 +114,7 @@ import {createInput} from '../../../helpers/formHelper'
             </form>
     )
 
-    if(this.state.loading){
+    if(this.props.loading){
       form = (  <Spinner />  );
     }
     return (
@@ -132,7 +131,8 @@ import {createInput} from '../../../helpers/formHelper'
 const mapStateToProps = state => {
   return ({
     ingredients: state.ingredients,
-    price: state.price
+    price: state.price,
+    loading: state.loading
   })
 }
 

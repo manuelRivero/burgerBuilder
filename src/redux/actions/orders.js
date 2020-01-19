@@ -17,16 +17,23 @@ export const purcharseBurgerFail = (err) => {
         payload: err
     })
 }
-export const purchaseBurger = (orderData) =>{
-    console.log("purchasing")
-    return( discpatch=>{
 
+export const purchaseBurgerStart = ()=> {
+    return {
+        type:actions.PURCHARSE_BURGER_START,
+    }
+}
+export const purchaseBurger = (orderData) =>{
+    
+    return( dispatch=>{
+
+        dispatch(purchaseBurgerStart());
         axios.post('/orders.json', orderData)
         .then( res => {
-            discpatch(purcharseBurgerSuccess(orderData))
+            dispatch(purcharseBurgerSuccess(res))
         })
         .catch( err => {
-            discpatch(purcharseBurgerFail(err))
+            dispatch(purcharseBurgerFail(err))
         });
     
     })
