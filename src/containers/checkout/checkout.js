@@ -19,6 +19,10 @@ class Checkout extends Component {
   }
 
   updatePurchaseState=(ingredients)=>{
+    
+    if(!ingredients){
+      return false
+    }
     let sum = Object.keys(ingredients).map( ingKeys =>{
       return ingredients[ingKeys];
     }).reduce( (sum, element)=>{
@@ -30,6 +34,7 @@ class Checkout extends Component {
   render() {
     if(!this.updatePurchaseState(this.props.ingredients)){
      this.props.history.replace('/');
+     return null;
     }
 
     return (
