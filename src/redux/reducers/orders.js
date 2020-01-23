@@ -26,7 +26,7 @@ export default ( state = initialState, action)=>{
         case actions.PURCHARSE_BURGER_START:
             return{
                 ...state,
-                loading:false
+                loading:true
             }
             break;        
     

@@ -130,9 +130,9 @@ import {createInput} from '../../../helpers/formHelper'
 
 const mapStateToProps = state => {
   return ({
-    ingredients: state.ingredients,
-    price: state.price,
-    loading: state.loading
+    ingredients: state.burger.ingredients,
+    price: state.burger.price,
+    loading: state.order.loading
   })
 }
 
