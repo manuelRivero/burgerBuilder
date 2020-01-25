@@ -38,3 +38,9 @@ export const purchaseBurger = (orderData) =>{
     
     })
 }
+
+export const redirectOn = () => {
+    return{
+        type: actions.REDIRECT_ON
+    }
+}

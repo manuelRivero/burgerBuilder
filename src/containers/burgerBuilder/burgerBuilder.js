@@ -80,7 +80,7 @@ import * as actions from './../../redux/actions/index';
 
   continuePurchasing=()=>{
     
-    let queryParams = [];
+    this.props.initPurchase();
     
     this.props.history.push('/checkout');
   }
@@ -144,8 +144,8 @@ const mapDispachToProps = dispatch =>{
   return {
     addIngredient: (ingredient)=>dispatch(actions.addIngredient(ingredient)),
     removeIngredient: (ingredient)=>dispatch(actions.removeIngredient(ingredient)),
-    initIngredients: ()=> dispatch(actions.initIngredients()
-    )
+    initIngredients: ()=> dispatch(actions.initIngredients()),
+    initPurchase: ()=> dispatch(actions.redirectOn())
   }
 }
 

@@ -3,7 +3,8 @@ import * as actions from './../actions/actionsTypes';
 
 const initialState = {
     orders:[],
-    loading:false
+    loading:false,
+    redirect:false
 }
 
 
@@ -14,7 +15,8 @@ export default ( state = initialState, action)=>{
             return ({
                 ...state,
                 orders: [...state.orders, action.payload],
-                loading:false
+                loading:false,
+                redirect:true
             })
             break;
         case actions.PURCHARSE_BURGER_FAIL:
@@ -28,7 +30,13 @@ export default ( state = initialState, action)=>{
                 ...state,
                 loading:true
             }
-            break;        
+            break;     
+            
+        case actions.REDIRECT_ON:
+            return {
+                ...state,
+                redirect:false
+            }
     
         default:
             return state

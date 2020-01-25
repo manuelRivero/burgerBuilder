@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 import CheckoutSummary from './../../components/checkoutSummary/checkoutSummary'
 import ContactData from './contactData/contactData';
+import * as actions from './../../redux/actions/index';
 
 import {connect} from 'react-redux'
 
@@ -9,7 +10,9 @@ import {connect} from 'react-redux'
 class Checkout extends Component {
 
 
-
+  componentWillMount(){
+    this.props.setRedirect();
+  }
   
   checkoutCancelledHandler= ()=>{
     this.props.history.goBack();
@@ -32,10 +35,11 @@ class Checkout extends Component {
     return sum > 0 ;
   }
   render() {
-    if(!this.updatePurchaseState(this.props.ingredients)){
+    if(!this.updatePurchaseState(this.props.ingredients) || this.props.redirect){
      this.props.history.replace('/');
      return null;
     }
+    
 
     return (
       <>
@@ -58,8 +62,15 @@ class Checkout extends Component {
 const mapstateToProps = state =>{
   return ({
     ingredients: state.burger.ingredients,
-    totalPrice: state.burger.totalPrice
+    totalPrice: state.burger.totalPrice,
+    redirect: state.order.redirect
   })
 }
 
-export default connect(mapstateToProps, null)(Checkout);
+const mapDispachtToProps = dispatch =>{
+  return {
+    setRedirect: ()=> dispatch( actions.redirectOn())
+  }
+}
+
+export default connect(mapstateToProps, mapDispachtToProps)(Checkout);
