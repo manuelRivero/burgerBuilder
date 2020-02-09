@@ -2,8 +2,6 @@ import axios from '../../axios-orders'
 
 import * as actions from './actionsTypes'
 
-
-
 export const purcharseBurgerSuccess = ({data}) => {
     return ({
         type: actions.PURCHARSE_BURGER_SUCCESS,
@@ -43,4 +41,38 @@ export const redirectOn = () => {
     return{
         type: actions.REDIRECT_ON
     }
+}
+
+const fetchOrderSuccess = (orders) =>{
+    
+    console.log(orders)
+  return ({
+        type: actions.FETHC_ORDER_SUCCESS,
+        payload: orders
+    })
+}
+
+const fetchOrderFail= (err) =>{
+    return ({
+        type: actions.FETHC_ORDER_FAIL,
+        payload: err.message
+    })
+}
+export const fetchOrder = () =>{
+    
+    return( dispatch=>{
+        axios.get('/orders.json')
+        .then( orders => {
+            let ordersArray = [];
+    
+            for( let order in orders.data){
+                ordersArray.push(orders.data[order])
+            }
+            dispatch(fetchOrderSuccess(ordersArray))
+        })
+        .catch( err => {
+            dispatch(fetchOrderFail(err))
+        });
+    
+    })
 }

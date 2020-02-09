@@ -37,7 +37,26 @@ export default ( state = initialState, action)=>{
                 ...state,
                 redirect:false
             }
-    
+        case actions.FETHC_ORDER_START:
+            return {
+                ...state,
+                loading: true,
+
+            }
+        case actions.FETHC_ORDER_FAIL:
+        return {
+            ...state,
+            loading: false,
+            
+        }
+
+        case actions.FETHC_ORDER_SUCCESS:
+            return {
+                ...state,
+                orders : action.payload,
+                loading: false,
+                
+            }
         default:
             return state
             break;
