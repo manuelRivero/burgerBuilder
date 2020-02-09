@@ -33,16 +33,19 @@ export default function Input(props) {
         case('text'):
             inputElement = ( <input onChange={changed} onBlur={blur} className={inputClasses.join(' ')} type={type} value={value} name={name} placeholder={placeholder} />);
             break;
+            
         case('textarea'):
              inputElement = ( <textarea onChange={changed} className={inputClasses.join(' ')} type={type} value={value}  name={name} placeholder={placeholder} />);
             break;
+
         case('select'):
         inputElement = ( <select onChange={changed} className={inputClasses.join(' ')}  type={type} value={value}  name={name}  >
                                 {options.map( o => (<option value={o} key={o}>{o}</option>) )}
                         </select>);
-        break;
+            break;
+        
         default:
-            inputElement = ( <input onChange={changed} className={inputClasses.join(' ')}  type={type} name={name} placeholder={placeholder} />);
+            inputElement = ( <input onChange={changed} onBlur={blur} className={inputClasses.join(' ')} type={type} value={value} name={name} placeholder={placeholder} />);
     }
 
   return (
