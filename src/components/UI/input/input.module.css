@@ -2,6 +2,7 @@
     width: 100%;
     padding: .5rem;
     box-sizing: border-box;
+    text-align: left;
 }
 
 .Label{

@@ -12,7 +12,7 @@ export default function Toolbar(props) {
           <Logo />
         </div>
         <nav className={[styles.Navigation]}>
-            <NavigationItem />
+            <NavigationItem isAuth ={ props.isAuth }/>
         </nav>
     </header>
   );

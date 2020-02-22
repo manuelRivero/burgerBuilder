@@ -3,14 +3,17 @@ import NavigationItem from './navigationItem/navigationItem'
 
 import styles from './navigationItems.module.css';
 
-export default function NavigationItems() {
+export default function NavigationItems(props) {
 
   
   return (
       <ul className={styles.NavigationItems}>
           <NavigationItem link="/"  >Burger Builder</NavigationItem>
           <NavigationItem link="/orders"   >Orders</NavigationItem>
-          <NavigationItem link="/auth"   >Log in</NavigationItem>
+          {props.isAuth ?
+          <NavigationItem link="/auth"   >Log in</NavigationItem> :
+          <NavigationItem link="/logout"   >Log out</NavigationItem>
+           }
 
       </ul>
 

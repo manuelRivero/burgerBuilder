@@ -16,3 +16,11 @@ export const FETHC_ORDER_SUCCESS= 'FECT_ORDER_SUCCESS';
 export const FETHC_ORDER_FAIL= 'FECT_ORDER_FAIL';
 export const FETHC_ORDER_START= 'FECT_ORDER_START';
 
+// Auth 
+
+
+export const AUTH_SUCCESS= 'AUTH_SUCCESS';
+export const AUTH_FAIL= 'AUTH_FAIL';
+export const AUTH_START= 'AUTH_START';
+
+export const AUTH_LOGOUT='AUTH_LOGOUT';

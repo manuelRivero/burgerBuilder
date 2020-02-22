@@ -8,11 +8,12 @@ import {connect} from 'react-redux'
 import * as actions from './../../redux/actions/index';
 
 import axios from './../../axios-orders'
+import { auth } from './../../redux/actions/index';
 
  class Orders extends Component {
 
   componentDidMount(){
-    this.props.fetchOrders()
+    this.props.fetchOrders(this.props.token)
   }
   
   render() {
@@ -39,13 +40,14 @@ import axios from './../../axios-orders'
 
 const mapDispatchToProps = (dispatch)=>{
   return ({
-    fetchOrders: ()=> dispatch(actions.fetchOrder())
+    fetchOrders: (token)=> dispatch(actions.fetchOrder(token))
   })
 }
 
 const mapStateToProps = (state) => {
   console.log(state)
   return ({
+    token: state.auth.user.idToken,
     orders: state.order.orders
   })
 }

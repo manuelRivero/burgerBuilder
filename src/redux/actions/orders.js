@@ -58,10 +58,10 @@ const fetchOrderFail= (err) =>{
         payload: err.message
     })
 }
-export const fetchOrder = () =>{
+export const fetchOrder = (token) =>{
     
     return( dispatch=>{
-        axios.get('/orders.json')
+        axios.get('/orders.json?auth=' + token )
         .then( orders => {
             let ordersArray = [];
     
