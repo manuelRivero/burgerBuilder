@@ -8,6 +8,7 @@ import Spinner from "./../../components/UI/spinner/spinner";
 import * as actions from "./../../redux/actions";
 
 import styles from "./auth.module.css";
+import { Redirect } from "react-router-dom";
 
 class Auth extends React.Component {
   constructor(props) {
@@ -122,18 +123,26 @@ class Auth extends React.Component {
         </form>
         <Button type="Success" clicked={this.switchAuthModeHandler}>
           {" "}
-           {this.state.isSignUp ? "already have account ?" : "Create a new account"}
+          {this.state.isSignUp
+            ? "already have account ?"
+            : "Create a new account"}
         </Button>
       </React.Fragment>
     );
     if (this.props.loading) {
       auth = <Spinner />;
     }
-    let error = (<p>{this.props.error.message}</p>)
-    return <div className={styles.Auth}>
-      { this.props.error ? error : null}
-      {auth}
-      </div>;
+    if (this.props.isAuth){
+      let redirectPath= this.props.isBuilding ? "/checkout" : "/"
+      auth = <Redirect to={redirectPath} />
+    }
+    let error = <p>{this.props.error.message}</p>;
+    return (
+      <div className={styles.Auth}>
+        {this.props.error ? error : null}
+        {auth}
+      </div>
+    );
   }
 }
 
@@ -147,7 +156,9 @@ const mapDispatchToprops = dispatch => {
 const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
-    error: state.auth.error
+    error: state.auth.error,
+    isBuilding: state.burger.building,
+    isAuth: state.auth.user.tokenId !== null
   };
 };
 

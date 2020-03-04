@@ -38,7 +38,7 @@ class Layout extends React.Component{
 
 const mapStateToProps = state => {
   return {
-    isAuth : state.auth.user.tokeId !== null
+    isAuth : state.auth.user.tokenId !== null
   }
 }
 

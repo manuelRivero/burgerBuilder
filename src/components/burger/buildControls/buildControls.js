@@ -12,7 +12,7 @@ const controls=[
 ]
 
 export default (props) => {
-  
+  let message = props.isAuth ?"Order now!" : "Log in to order!";
   return (
     <div className={styles.BuildControls}>
       <p>Current Price: <strong>{props.price.toFixed(2)}</strong></p>
@@ -20,7 +20,9 @@ export default (props) => {
             return ( <BuildControl key={c.label} {...c} disable={props.disabledInfo[c.type]}  add={props.addIngredient} des={props.desIngredient}/>)
         })}
 
-        <button className={styles.OrderButton} onClick={props.ordered} disabled={!props.purchasable}>Order Now!</button>
+        <button className={styles.OrderButton} onClick={props.ordered} disabled={!props.purchasable}>
+          {message}
+        </button>
     </div>
   )
 }

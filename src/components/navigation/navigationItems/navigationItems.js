@@ -11,8 +11,9 @@ export default function NavigationItems(props) {
           <NavigationItem link="/"  >Burger Builder</NavigationItem>
           <NavigationItem link="/orders"   >Orders</NavigationItem>
           {props.isAuth ?
-          <NavigationItem link="/auth"   >Log in</NavigationItem> :
-          <NavigationItem link="/logout"   >Log out</NavigationItem>
+          <NavigationItem link="/logout"   >Log out</NavigationItem>:
+          <NavigationItem link="/auth"   >Log in</NavigationItem> 
+          
            }
 
       </ul>
