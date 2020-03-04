@@ -70,7 +70,11 @@ import * as actions from './../../redux/actions/index';
   }
 
   purchasing=()=>{
-    this.setState( oldState=> ({purchasing: true}))
+    if(this.props.isAuth){
+      this.setState( oldState=> ({purchasing: true}))
+    }else{
+      this.props.history.push("/auth");
+    }
   }
 
   cancelPurchasing=()=>{
@@ -109,7 +113,8 @@ import * as actions from './../../redux/actions/index';
                disabledInfo={disabledInfo}
                price={this.props.totalPrice}
                purchasable={this.updatePurchaseState(this.props.ingredients)}
-               ordered={this.purchasing}/>
+               ordered={this.purchasing}
+               isAuth={this.props.isAuth}/>
            </Aux>
            );
       orderSummary =(<OrderSummary 
@@ -136,7 +141,8 @@ const mapStateToProps = state =>{
   return {
     ingredients: state.burger.ingredients,
     totalPrice: state.burger.totalPrice,
-    error: state.burger.error
+    error: state.burger.error,
+    isAuth: state.auth.user.tokenId!== null
   }
 }
 
