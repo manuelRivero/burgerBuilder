@@ -8,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
 import store from './redux/store';
 
-const app= ( <BrowserRouter><App /></BrowserRouter>)
+const app= ( <BrowserRouter  basename='burgerBuilder/'><App /></BrowserRouter>)
 
 ReactDOM.render(<Provider store={store}>{app}</Provider>, document.getElementById('root'));
 
