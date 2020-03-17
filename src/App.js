@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import  styles from './App.module.css';
 
-import {Route, withRouter} from 'react-router-dom'
+import {Route, withRouter, Switch, Redirect} from 'react-router-dom'
 
 import {connect} from 'react-redux';
 import * as actions from './redux/actions';
@@ -17,13 +17,29 @@ import Logout from './containers/auth/logout/logout';
 function App(props) {
    props.onCheckAuthState();
 
+   let routes = (
+     <Switch>
+      <Route path='/auth'  exact component={Auth}/>
+      <Route path='/'  exact component={BurgerBuilder}/>
+      <Redirect to="/" />
+     </Switch>
+   )
+     if(props.isAuth){
+      routes =(
+        <Switch>
+          <Route path='/checkout' component={Checkout}/> 
+          <Route path='/orders' component={Order} />
+          <Route path='/auth'  exact component={Auth}/>
+          <Route path='/logout' exact component={Logout} />
+          <Route path='/'  exact component={BurgerBuilder}/>
+          <Redirect to="/" />
+        </Switch>
+      )
+     }
+
   return (
     <Layout>      
-      <Route path='/checkout' component={Checkout}/> 
-      <Route path='/orders' component={Order} />
-      <Route path='/auth'  exact component={Auth}/>
-      <Route path='/logout' exact component={Logout} />
-      <Route path='/'  exact component={BurgerBuilder}/>
+      {routes}
     </Layout>
   );
 }
@@ -33,5 +49,8 @@ const mapDispatchToProps = dispatch =>{
     onCheckAuthState : () => {dispatch(actions.authState())}
   }
 }
+const mapSatateToProps = state => {
+  return {isAuth: state.auth.user.tokenId !==null}
+}
 
-export default withRouter(connect(null, mapDispatchToProps)(App))
+export default withRouter(connect(mapSatateToProps, mapDispatchToProps)(App))
