@@ -24,6 +24,7 @@ const authFail = (state, action) => {
 const authLogOut = (state, action) => {
   return {
     ...state,
+    loading:false,
     user: { localId: null, tokenId: null, refreshToken: null }
   };
 };
@@ -36,7 +37,7 @@ export default (state = initialState, action) => {
       return authFail(state, action);
     case actions.AUTH_SUCCESS:
       return authSuccess(state, action);
-    case actions.AUTH_SUCCESS:
+    case actions.AUTH_LOGOUT:
       return authLogOut(state, action);
     default:
       return state;
