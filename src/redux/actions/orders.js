@@ -56,9 +56,15 @@ const fetchOrderFail= (err) =>{
         payload: err.message
     })
 }
+const fetchOrderStart = () => {
+    return {
+        type:actions.FETHC_ORDER_START
+    }
+}
 export const fetchOrder = (token) =>{
     
     return( dispatch=>{
+        dispatch(fetchOrderStart())
         axios.get('/orders.json?auth=' + token )
         .then( orders => {
             let ordersArray = [];

@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 import * as actions from './../../redux/actions/index';
 
 import axios from './../../axios-orders'
-import { auth } from './../../redux/actions/index';
+
 
  class Orders extends Component {
 
@@ -23,7 +23,7 @@ import { auth } from './../../redux/actions/index';
       })
     );
 
-    if(this.props.loading){
+    if(this.props.isloading){
       order= <Spinner />
     }
     return (
@@ -47,7 +47,8 @@ const mapDispatchToProps = (dispatch)=>{
 const mapStateToProps = (state) => {
   return ({
     token: state.auth.user.tokenId,
-    orders: state.order.orders
+    orders: state.order.orders,
+    isLoading: state.order.loading
   })
 }
 

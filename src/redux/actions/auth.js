@@ -26,7 +26,7 @@ export const auth = (email, password, signIn)=>{
         })
         .catch(err =>{
             console.log(err.response.data.error)
-            dispach(authFail(err))
+            dispach(authFail(err.response.data.error))
         })
         dispach(authStart())
     }
