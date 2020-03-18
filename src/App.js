@@ -15,7 +15,10 @@ import Auth from './containers/auth/auth'
 import Logout from './containers/auth/logout/logout';
 
 function App(props) {
-   props.onCheckAuthState();
+
+  React.useEffect(() => {
+    props.onCheckAuthState()
+  }, [props.isAuth])
 
    let routes = (
      <Switch>
