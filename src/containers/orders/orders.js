@@ -45,9 +45,8 @@ const mapDispatchToProps = (dispatch)=>{
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return ({
-    token: state.auth.user.idToken,
+    token: state.auth.user.tokenId,
     orders: state.order.orders
   })
 }
