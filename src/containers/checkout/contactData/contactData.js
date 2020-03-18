@@ -33,11 +33,12 @@ import {createInput} from '../../../helpers/formHelper'
       orderData[inputKey] = this.state.form[inputKey].value;
     }
     
-    const {ingredients, price}=this.props;
+    const {ingredients, totalPrice, tokenId}=this.props;
     const order={
       ingredients,
-      price,
-      orderData
+      totalPrice,
+      orderData,
+      tokenId
     }
     this.props.submitContactData(order);
     }
@@ -131,8 +132,9 @@ import {createInput} from '../../../helpers/formHelper'
 const mapStateToProps = state => {
   return ({
     ingredients: state.burger.ingredients,
-    price: state.burger.price,
-    loading: state.order.loading
+    totalPrice: state.burger.totalPrice,
+    loading: state.order.loading,
+    tokenId: state.auth.user.tokenId
   })
 }
 
