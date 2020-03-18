@@ -22,11 +22,11 @@ export const purchaseBurgerStart = ()=> {
     }
 }
 export const purchaseBurger = (orderData) =>{
-    
+    console.log(orderData)
     return( dispatch=>{
 
         dispatch(purchaseBurgerStart());
-        axios.post('/orders.json', orderData)
+        axios.post(`/orders.json?auth=${orderData.tokenId}`, orderData)
         .then( res => {
             dispatch(purcharseBurgerSuccess(res))
         })
@@ -44,8 +44,6 @@ export const redirectOn = () => {
 }
 
 const fetchOrderSuccess = (orders) =>{
-    
-    console.log(orders)
   return ({
         type: actions.FETHC_ORDER_SUCCESS,
         payload: orders
