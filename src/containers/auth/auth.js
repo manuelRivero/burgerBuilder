@@ -88,6 +88,7 @@ class Auth extends React.Component {
     this.props.auth(email.value, password.value, this.state.isSignUp);
   };
 
+  // for set login or sign up
   switchAuthModeHandler = () => {
     this.setState(prevState => {
       return {
@@ -129,6 +130,10 @@ class Auth extends React.Component {
         </Button>
       </React.Fragment>
     );
+    // alert message
+    let errorAlert;
+
+    // checking props 
     if (this.props.loading) {
       auth = <Spinner />;
     }
@@ -136,10 +141,12 @@ class Auth extends React.Component {
       let redirectPath= this.props.isBuilding ? "/checkout" : "/"
       auth = <Redirect to={redirectPath} />
     }
-    let error = <p>{this.props.error.message}</p>;
+    if (this.props.error.code === 400){
+      errorAlert = <p>Ya existe una cuenta con ese email, prueba uno distinto o inicia sesion!</p>;
+    }
     return (
       <div className={styles.Auth}>
-        {this.props.error ? error : null}
+        {this.props.error ? errorAlert : null}
         {auth}
       </div>
     );
