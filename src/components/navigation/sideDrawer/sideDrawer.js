@@ -16,8 +16,8 @@ export default function sideDrawer(props) {
             <div className={styles.Logo}>
                <Logo /> 
             </div>
-            <nav>
-              <NavigationItems />
+            <nav onClick={props.closeSideDrawer}>
+              <NavigationItems isAuth ={ props.isAuth }/>
             </nav>
       </div>
     </Aux>
