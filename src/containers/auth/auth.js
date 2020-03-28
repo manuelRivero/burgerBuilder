@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Input from "./../../components/UI/input/input";
 import Button from "./../../components/UI/button/button";
-import { createInput } from "./../../helpers/formHelper";
+import { createInput, checkValidity } from "./../../helpers/formHelper";
 import Spinner from "./../../components/UI/spinner/spinner";
 
 import * as actions from "./../../redux/actions";
@@ -28,29 +28,8 @@ class Auth extends React.Component {
     };
   }
 
-  checkValidity(value, rules) {
-    let isValid = true;
-
-    if (!rules) {
-      return isValid;
-    }
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-
-    if (rules.isEmail) {
-      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      isValid = re.test(String(value).toLowerCase()) && isValid;
-    }
-    return isValid;
-  }
 
   inputBlurHandler = ({ target }) => {
-    console.log("blur");
     const updateform = { ...this.state.form };
     let updateInput = {
       ...updateform[target.name],
@@ -63,7 +42,6 @@ class Auth extends React.Component {
   };
 
   inputChangedHandler = ({ target }) => {
-    console.log("click");
     const updateform = { ...this.state.form };
     let updateInput = {
       ...updateform[target.name],
@@ -71,7 +49,7 @@ class Auth extends React.Component {
       dirty: true
     };
 
-    updateInput.valid = this.checkValidity(
+    updateInput.valid =checkValidity(
       target.value,
       updateform[target.name].validation
     );

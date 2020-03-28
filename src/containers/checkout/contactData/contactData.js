@@ -8,7 +8,7 @@ import Input from './../../../components/UI/input/input'
 
 import styles from './contactData.module.css';
 
-import {createInput} from '../../../helpers/formHelper'
+import {createInput, checkValidity} from '../../../helpers/formHelper'
 
  class ContactData extends Component {
     constructor(){
@@ -65,29 +65,14 @@ import {createInput} from '../../../helpers/formHelper'
            dirty:true
           };
 
-      updateInput.valid = this.checkValidity(target.value, updateform[target.name].validation); 
+      updateInput.valid = checkValidity(target.value, updateform[target.name].validation); 
       updateInput.wasInvalid = updateInput.valid && updateInput.touched;
       updateform[target.name] = updateInput;
 
       
       this.setState( {form:updateform})
     }
-
-    checkValidity(value, rules){
-      let isValid= true;
-      
-      if(!rules){
-        return isValid;
-      }
-        if( rules.required){
-          isValid = value.trim() !== "" && isValid;
-        }
-
-        if( rules.minLength){
-          isValid = value.length >= rules.minLength && isValid;
-        }
-      return isValid;
-    }
+    
 
   render() {
     let formIsValid = true;

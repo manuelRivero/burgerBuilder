@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Redirect} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import CheckoutSummary from './../../components/checkoutSummary/checkoutSummary'
 import ContactData from './contactData/contactData';
 import * as actions from './../../redux/actions/index';
