@@ -17,48 +17,43 @@ export default ( state = initialState, action)=>{
                 orders: [...state.orders, action.payload],
                 loading:false,
                 redirect:true
-            })
-            break;
+            });
         case actions.PURCHARSE_BURGER_FAIL:
             return({
                 ...state,
                 loading:false
-            })
-            break;
+            });
         case actions.PURCHARSE_BURGER_START:
-            return{
+            return({
                 ...state,
                 loading:true
-            }
-            break;     
-            
+            })
         case actions.REDIRECT_ON:
-            return {
+            return ({
                 ...state,
                 redirect:false
-            }
+            });
         case actions.FETHC_ORDER_START:
-            return {
+            return ({
                 ...state,
                 loading: true,
 
-            }
+            });
         case actions.FETHC_ORDER_FAIL:
-        return {
+        return ({
             ...state,
             loading: false,
             
-        }
+        });
 
         case actions.FETHC_ORDER_SUCCESS:
-            return {
+            return ({
                 ...state,
                 orders : action.payload,
                 loading: false,
                 
-            }
+            });
         default:
-            return state
-            break;
+            return state;
     }
 }
