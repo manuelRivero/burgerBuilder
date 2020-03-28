@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import BurgerIngredient from './burgerIngredient/burgerIngredient';
 
 import styles from './burger.module.css';

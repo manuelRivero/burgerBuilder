@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import  styles from './App.module.css';
 
 import {Route, withRouter, Switch, Redirect} from 'react-router-dom'
 
@@ -15,10 +13,10 @@ import Auth from './containers/auth/auth'
 import Logout from './containers/auth/logout/logout';
 
 function App(props) {
-
+const {isAuth,onCheckAuthState } = props;
   React.useEffect(() => {
-    props.onCheckAuthState()
-  }, [props.isAuth])
+    onCheckAuthState()
+  }, [isAuth])
 
    let routes = (
      <Switch>

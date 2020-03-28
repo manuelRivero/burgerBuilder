@@ -5,7 +5,7 @@ import styles from './order.module.css';
 export default function Order(props) {
 
 
-  const {address, deliverymethod, email, ingredients, totalPrice}= props;
+  const {ingredients, totalPrice}= props;
 
   let ingredientsArray =[];
 
